@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #090b12;
+  --foreground: #f5f6fa;
+  --glass-border: rgba(255, 255, 255, 0.11);
+  --glass-fill: rgba(255, 255, 255, 0.055);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+* { box-sizing: border-box; }
+html { min-height: 100%; background: var(--background); }
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 88% 4%, rgba(180, 124, 42, 0.13), transparent 34rem),
+    radial-gradient(ellipse at 8% 34%, rgba(92, 108, 180, 0.12), transparent 36rem),
+    linear-gradient(155deg, #10131d 0%, var(--background) 48%, #0b0d13 100%);
+  background-attachment: fixed;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+::selection { background: #fbbf24; color: #171717; }
+
+.glass-surface {
+  border-color: var(--glass-border) !important;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035)) !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  backdrop-filter: blur(22px) saturate(145%);
+}
+
+main .bg-neutral-900,
+main .bg-neutral-950 {
+  background-color: rgba(18, 21, 31, 0.64) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+main .bg-neutral-800\/70 {
+  background-color: rgba(255, 255, 255, 0.055) !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glass-surface { transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease; }
 }
